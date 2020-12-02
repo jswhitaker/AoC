@@ -3,6 +3,7 @@ from typing import List, Any
 
 PasswordEntry = namedtuple('PasswordEntry', ['low', 'high', 'letter', 'password'])
 
+
 # moved from main for part 2
 def part1():
     password_entries: List[PasswordEntry] = []
@@ -20,6 +21,7 @@ def part1():
             correct_count = correct_count + 1
     return correct_count
 
+
 def main():
     password_entries: List[PasswordEntry] = []
     with open('day2-input.txt') as password_file:
@@ -31,9 +33,8 @@ def main():
 
     correct_count = 0
     for entry in password_entries:
-        count = entry.password.count(entry.letter)
-        if entry.low <= count <= entry.high:
-            correct_count = correct_count + 1
+        if (entry.password[entry.low - 1] is entry.letter) != (entry.password[entry.high - 1] is entry.letter):
+            correct_count += 1
     return correct_count
 
 
