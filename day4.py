@@ -1,5 +1,6 @@
 import re
 
+
 def validator(key, value):
     if key == 'byr':
         return 1920 <= int(value) <= 2002
