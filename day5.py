@@ -10,15 +10,16 @@ def convert(code):
 def main():
     max_code = 'FFFFFFFLLL'
     max_bin = convert(max_code)
+    taken_seats = []
     with open('day5-input.txt') as input_file:
         for line in input_file:
-            new_bin = convert(line.strip())
-            if new_bin > max_bin:
-                max_bin = new_bin
-                max_code = line.strip()
-    return max_code
+            taken_seats.append(convert(line.strip()))
+    taken_seats.sort()
+    for i in range(len(taken_seats)):
+        if taken_seats[i+1] == taken_seats[i] + 2:
+            return taken_seats[i] + 1
 
 
 if __name__ == '__main__':
     result = main()
-    print('max code:' + result + ' ' + str(convert(result)) + ' ' + bin(convert(result)))
+    print(result)
