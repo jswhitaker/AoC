@@ -12,16 +12,24 @@ def decrypt(target):
         print('Delta: ' + str(target - sum(sum_num)))
         if sum(sum_num) == target:
             print('found: ' + str(sum_num))
-            break
+            min_num = min(sum_num)
+            max_num = max(sum_num)
+            return min_num, max_num
         elif sum(sum_num) < target:
             print('Below')
             sum_num.append(int(line))
         else:
-            print('Above')
-            sum_num.pop(0)
+            while sum(sum_num) > target:
+                sum_num.pop(0)
+                if sum(sum_num) == target:
+                    print('found: ' + str(sum_num))
+                    min_num = min(sum_num)
+                    max_num = max(sum_num)
+                    return min_num, max_num
+            sum_num.append(int(line))
     min_num = min(sum_num)
     max_num = max(sum_num)
-    return min_num+max_num
+    return min_num, max_num
 
 def decrypt_brute(target):
     with open('day9-input.txt') as input_file:
@@ -49,7 +57,7 @@ def invalid_number():
 
 
 def main ():
-    i, j = decrypt_brute(1309761972)
+    i, j = decrypt(1309761972)
     return i + j
 
 
