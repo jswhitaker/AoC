@@ -23,8 +23,14 @@ def part2(data_ints):
         count += part2(data_ints[i:])
     return count
 
-def part2_better(data_inits):
 
+def part2_better(data_ints):
+    memo = {}
+    data_ints.reverse()
+    memo[max(data_ints)] = 1
+    for i in data_ints[1:]:
+        memo[i] = memo.get(i+1, 0) + memo.get(i+2, 0) + memo.get(i+3, 0)
+    return memo[0]
 
 
 def main():
@@ -35,7 +41,7 @@ def main():
     data_ints.append(0)
     data_ints.sort()
     part1(data_ints)
-    print(part2(data_ints))
+    print(part2_better(data_ints))
     return 0
 
 
