@@ -27,7 +27,7 @@ class ExpenseReport(object):
 
 if __name__ == '__main__':
     expenses: list[int] = list()
-    with open('day1-input.txt') as expense_file:
+    with open('inputs/01-input.txt') as expense_file:
         for expense in expense_file:
             expenses.append(int(expense))
     expenses.sort()

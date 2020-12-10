@@ -2,7 +2,7 @@ import string
 
 
 def main():
-    with open('day6-input.txt') as input_file:
+    with open('inputs/06-input.txt') as input_file:
         data = input_file.read()
     groups = data.split('\n\n')
     group_yeses = []

@@ -5,7 +5,7 @@ import itertools
 
 def decrypt(target):
     sum_num = []
-    with open('day9-input.txt') as input_file:
+    with open('inputs/09-input.txt') as input_file:
         data = input_file.readlines()
     for line in data:
         print(sum(sum_num))
@@ -32,7 +32,7 @@ def decrypt(target):
     return min_num, max_num
 
 def decrypt_brute(target):
-    with open('day9-input.txt') as input_file:
+    with open('inputs/09-input.txt') as input_file:
         data = input_file.readlines()
     data_int = [int(k) for k in data]
     for i in range(len(data)):
@@ -44,7 +44,7 @@ def decrypt_brute(target):
 
 def invalid_number():
     sum_num = []
-    with open('day9-input.txt') as input_file:
+    with open('inputs/09-input.txt') as input_file:
         data = input_file.readlines()
     for line in data[:25]:
         sum_num.append(int(line))

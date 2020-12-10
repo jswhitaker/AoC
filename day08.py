@@ -43,7 +43,7 @@ def fix_program(instructions):
 
 def main():
     instructions = []
-    with open('day8-input.txt') as input_file:
+    with open('inputs/08-input.txt') as input_file:
         for line in input_file:
             line_split = line.rstrip().split()
             instructions.append((line_split[0], int(line_split[1])))

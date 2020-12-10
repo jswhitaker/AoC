@@ -33,7 +33,7 @@ def count_inner_bags(bag_color: AnyStr, rules: Dict[str, List[Tuple[str, str]]])
 
 def main():
     rules = {}
-    with open('day7-input.txt') as input_file:
+    with open('inputs/07-input.txt') as input_file:
         for line in input_file:
             outer, contains = process_rule(line)
             rules[outer] = contains

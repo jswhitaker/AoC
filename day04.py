@@ -28,7 +28,7 @@ def validator(key, value):
 def main(required):
     count = 0
     fields = {}
-    with open('day4-input.txt') as input_file:
+    with open('inputs/04-input.txt') as input_file:
         for line in input_file:
             if line == '\n':
                 i = 0

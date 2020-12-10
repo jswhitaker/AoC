@@ -1,7 +1,7 @@
 def main(right, down):
     position = 0
     trees = 0
-    with open('day3-input.txt') as input_file:
+    with open('inputs/03-input.txt') as input_file:
         for i, line in enumerate(input_file):
             if i % down != 0:
                 continue

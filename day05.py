@@ -11,7 +11,7 @@ def main():
     max_code = 'FFFFFFFLLL'
     max_bin = convert(max_code)
     taken_seats = []
-    with open('day5-input.txt') as input_file:
+    with open('inputs/05-input.txt') as input_file:
         for line in input_file:
             taken_seats.append(convert(line.strip()))
     taken_seats.sort()

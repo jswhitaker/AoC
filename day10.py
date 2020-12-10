@@ -34,7 +34,7 @@ def part2_better(data_ints):
 
 
 def main():
-    with open('day10-input.txt') as input_file:
+    with open('inputs/10-input.txt') as input_file:
         data = input_file.readlines()
     data_ints = [int(d) for d in data]
     data_ints.append(max(data_ints) + 3)

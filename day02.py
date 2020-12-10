@@ -7,7 +7,7 @@ PasswordEntry = namedtuple('PasswordEntry', ['low', 'high', 'letter', 'password'
 # moved from main for part 2
 def part1():
     password_entries: List[PasswordEntry] = []
-    with open('day2-input.txt') as password_file:
+    with open('inputs/02-input.txt') as password_file:
         for line in password_file:
             low, _, remainder = line.partition('-')
             high, _, remainder = remainder.partition(' ')
@@ -24,7 +24,7 @@ def part1():
 
 def main():
     password_entries: List[PasswordEntry] = []
-    with open('day2-input.txt') as password_file:
+    with open('inputs/02-input.txt') as password_file:
         for line in password_file:
             low, _, remainder = line.partition('-')
             high, _, remainder = remainder.partition(' ')
