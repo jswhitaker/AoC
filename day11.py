@@ -66,6 +66,7 @@ class SeatingArea(object):
     def find_seating_balance(self) -> int:
         balanced = False
         while not balanced:
+            # Change line below to switch between part 1 and 2
             self.update_seating(self.check_adjacent_seats)
             self.seating_change_count += 1
             print(self.seating_change_count)
