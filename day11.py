@@ -45,7 +45,8 @@ class SeatingArea(object):
                 while (col + c_modifier) >= 0 and self.seating[row + r_modifier][col + c_modifier] is None:
                     r_modifier += r
                     c_modifier += c
-                occupied_count += 1 if (col + c_modifier) >= 0 and self.seating[row + r_modifier][col + c_modifier] else 0
+                occupied_count += 1 if (col + c_modifier) >= 0 and self.seating[row + r_modifier][col + c_modifier] \
+                    else 0
             except (IndexError, KeyError):
                 pass
         return occupied_count
