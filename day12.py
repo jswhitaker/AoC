@@ -4,7 +4,7 @@
 # ship starts facing E
 # East and North are positive
 # South and West are negative
-# Starting at 0,0
+# Ship starts at at 0,0 for both parts
 
 
 class Ship(object):
@@ -34,7 +34,7 @@ class Ship(object):
         elif instruction == 'W':
             self.ew -= instruction_num
 
-    # part2
+    # part2, only F actually moves the ship. All other commands go to the waypoint.
     def move_ship(self, instruction, instruction_num):
         if instruction == 'F':
             self.ns += self.waypoint.ns * instruction_num
