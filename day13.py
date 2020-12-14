@@ -1,5 +1,5 @@
 import itertools
-
+from sympy.ntheory.modular import crt
 
 def part1():
     with open('inputs/13-input.txt') as input_file:
@@ -21,7 +21,19 @@ def part1():
 
 
 def part2():
-    pass
+    with open('inputs/13-input.txt') as input_file:
+        data = input_file.readlines()
+    ts = int(data[0])
+    routes = data[1].rstrip().split(',')
+    route_offset = {}
+    for i, r in enumerate(routes):
+        if r != 'x':
+            route_offset[int(r)] = i
+    print(route_offset)
+    print(route_offset.keys())
+    print(route_offset.values())
+    print(crt(route_offset.keys(), [-v for v in route_offset.values()], check=False))
+    return 0
 
 
 def main():
