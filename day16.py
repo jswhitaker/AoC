@@ -32,12 +32,15 @@ class TicketProcessor:
         return invalid_sum
 
     def find_field_locations(self, ticket: List[int]):
-        if self.check_ticket_invalid(ticket) == 0:
-            for name, ranges in self.rules.items():
-                r1, r2 = ranges
-                for i, field in enumerate(ticket):
-                    if i in self.field_locations[name] and not (r1[0] <= field <= r1[1] or r2[0] <= field <= r2[1]):
-                        self.field_locations[name].discard(i)
+        # Discard invalid tickets
+        if self.check_ticket_invalid(ticket) > 0:
+            return
+
+        # Remove potential field location if ticket's field does not pass the rules.
+        for name, (r1, r2) in self.rules.items():
+            for i, field in enumerate(ticket):
+                if i in self.field_locations[name] and not (r1[0] <= field <= r1[1] or r2[0] <= field <= r2[1]):
+                    self.field_locations[name].discard(i)
 
 
 def main():
