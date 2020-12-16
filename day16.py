@@ -19,8 +19,9 @@ class TicketProcessor:
         self.rules[name] = [(int(r1_lo), int(r1_hi)), (int(r2_lo), int(r2_hi))]
         self.field_locations[name] = set(range(field_count))
 
-    def check_ticket_invalid(self, ticket: List[int]) -> int:
+    def check_ticket_invalid(self, ticket: List[int]) -> Tuple[bool, int]:
         invalid_sum = 0
+        valid_match = True
         for field in ticket:
             match = False
             for r1, r2 in self.rules.values():
@@ -29,11 +30,13 @@ class TicketProcessor:
                     break
             if not match:
                 invalid_sum += field
-        return invalid_sum
+                valid_match = False
+        return valid_match, invalid_sum
 
     def find_field_locations(self, ticket: List[int]):
         # Discard invalid tickets
-        if self.check_ticket_invalid(ticket) > 0:
+        valid, _ = self.check_ticket_invalid(ticket)
+        if not valid:
             return
 
         # Remove potential field location if ticket's field does not pass the rules.
@@ -41,6 +44,26 @@ class TicketProcessor:
             for i, field in enumerate(ticket):
                 if i in self.field_locations[name] and not (r1[0] <= field <= r1[1] or r2[0] <= field <= r2[1]):
                     self.field_locations[name].discard(i)
+
+    def solve_field_locations(self):
+        solved = []
+        while len(solved) < len(self.field_locations):
+            curr_location = set()
+            for field, locs in self.field_locations.items():
+                if field not in solved and len(locs) == 1:
+                    curr_location = locs
+                    solved.append(field)
+            for locs in self.field_locations.values():
+                if len(locs) > 1:
+                    locs -= curr_location
+
+    # only call after solving field locations!!
+    def departure_mul(self, ticket: List[int]) -> int:
+        result = 1
+        for field, index in self.field_locations.items():
+            if field.startswith('departure'):
+                result *= ticket[list(index)[0]]
+        return result
 
 
 def main():
@@ -56,12 +79,17 @@ def main():
             ticket = line.rstrip().split(',')
             ticket = [int(t) for t in ticket]
             # part 1
-            error_rate += processor.check_ticket_invalid(ticket)
+            _, rate = processor.check_ticket_invalid(ticket)
+            error_rate += rate
             # part 2
             processor.find_field_locations(ticket)
+    processor.solve_field_locations()
     print('Error Rate: ' + str(error_rate))
     print('Field Locations:')
     pprint.pprint(processor.field_locations)
+    dep_mul = processor.departure_mul(
+        [127, 89, 149, 113, 181, 131, 53, 199, 103, 107, 97, 179, 109, 193, 151, 83, 197, 101, 211, 191])
+    print('Part 2: ' + str(dep_mul))
 
 
 if __name__ == '__main__':
