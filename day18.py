@@ -16,6 +16,7 @@ class Calculator(object):
         return cls(equation_str.split())
 
     # Part 1
+    # the return value if `i` is used to jump over sections that are recursively calculated due to parens.
     def solve(self) -> Tuple[int, int]:
         i = 0
         while i < len(self.equation):
@@ -36,8 +37,10 @@ class Calculator(object):
         return i, self.current_value
 
     # This assumes parens are the highest always.
+    # Operations are provided in order of precedence.
     def solve_with_precedence(self, operations: List[str]) -> Tuple[int, int]:
         length = 0
+        # Recursively call until at the most inner parens before any are closed.
         while '(' in self.equation and self.equation.index('(') < self.equation.index(')'):
             next_paren = self.equation.index('(')
             inner_cal = Calculator(self.equation[next_paren + 1:])
@@ -89,13 +92,16 @@ def main():
         for line in input_file:
             if line.startswith('#'):
                 continue
+            # Preprocessing to add spaces for easier splitting.
             line = line.replace('(', '( ')
             line = line.replace(')', ' )')
+            # Part 1
             calc_1 = Calculator.from_str(line)
             _, value_1 = calc_1.solve()
+            total_sum_1 += value_1
+            # Part 2
             calc_2 = Calculator.from_str(line)
             _, value_2 = calc_2.solve_with_precedence(['+', '*'])
-            total_sum_1 += value_1
             total_sum_2 += value_2
     print('Part 1: ', total_sum_1)
     print('Part 2: ', total_sum_2)
