@@ -11,6 +11,7 @@ class Validator(object):
         for rule in rules:
             self.__add_rule(rule)
         self.reduce_rules()
+        self.reduced = {k: set(v) for k, v in self.reduced.items()}
 
     def __add_rule(self, rule_str: str):
         rule_match = self.rule_regex.match(rule_str)
@@ -44,8 +45,35 @@ class Validator(object):
         self.unreduced.remove(key)
         return resolved_rule
 
-    def match_rule(self, rule_num: str, test_str: str):
+    def match_rule(self, rule_num: str, test_str: str) -> bool:
         return test_str in self.reduced[rule_num]
+
+    # Ugly hacks for part2
+    # rule zero converts into match `42` repeatedly then match `31` repeatedly.
+    # the number of `42` matches must be greater than the number of `31` matches
+    def match_part2(self, test_str: str) -> bool:
+        index = 0
+        count_42 = 0
+        count_31 = 0
+
+        # `42` matching
+        matches = True
+        while matches:
+            matches = test_str.startswith(tuple(self.reduced['42']), index)
+            if matches:
+                index += 8
+                count_42 += 1
+
+        # `31` matching
+        matches = True
+        while matches:
+            matches = test_str.startswith(tuple(self.reduced['31']), index)
+            if matches:
+                index += 8
+                count_31 += 1
+
+        # check entire string consumed and that there are more `42` matches than `31`
+        return index == len(test_str) and count_42 > count_31 > 0
 
 
 def main():
@@ -54,7 +82,7 @@ def main():
     matches = 0
     with open('inputs/19-input.txt') as input_file:
         for line in input_file:
-            if validator.match_rule('0', line.rstrip()):
+            if validator.match_part2(line.rstrip()):
                 matches += 1
     return matches
 
