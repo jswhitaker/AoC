@@ -36,6 +36,9 @@ def main():
         all_i.update(il)
     non_allergens = all_i.difference(set(solved_mapping.values()))
     count = sum([ingreds.count(non_a) for non_a in non_allergens for ingreds in i_lists])
+    alpha_allergens = sorted(solved_mapping.keys())
+    ordered_ingredients = [solved_mapping[k] for k in alpha_allergens]
+    print(','.join(ordered_ingredients))
     return count
 
 
