@@ -1,5 +1,5 @@
 def main():
-    with open('2020/inputs/04-input.txt') as input_file:
+    with open('inputs/02.txt') as input_file:
 #        data = input_file.read()
 #        groups = data.split('\n\n')
 #     for line in input_file:

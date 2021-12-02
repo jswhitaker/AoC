@@ -1,4 +1,4 @@
-from typing import List, Tuple
+from typing import List
 
 
 def main():
@@ -6,9 +6,10 @@ def main():
     with open('inputs/02.txt') as input_file:
         for line in input_file:
             steps.append(line.split())
-    return part2(steps)
+    return part1(steps), part2(steps)
 
-def part1(steps: List[Tuple[str, str]]):
+
+def part1(steps: List[List[str]]):
     depth = 0
     horz = 0
     for direction, num in steps:
@@ -20,7 +21,8 @@ def part1(steps: List[Tuple[str, str]]):
             depth = depth - int(num)
     return depth * horz
 
-def part2(steps: List[Tuple[str, str]]):
+
+def part2(steps: List[List[str]]):
     aim = 0
     depth = 0
     horz = 0
@@ -33,6 +35,7 @@ def part2(steps: List[Tuple[str, str]]):
         elif direction == 'up':
             aim = aim - int(num)
     return depth * horz
+
 
 if __name__ == '__main__':
     result = main()
