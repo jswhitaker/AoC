@@ -17,6 +17,7 @@ def main_2():
 
     return int(o_lines[0], 2) * int(co_lines[0], 2)
 
+
 def air_rating(lines, is_most, prefix):
     count = 0
     for val in lines:
