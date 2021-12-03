@@ -1,9 +1,9 @@
 def main():
     with open('inputs/02.txt') as input_file:
-#        data = input_file.read()
-#        groups = data.split('\n\n')
-#     for line in input_file:
-    pass
+        #        data = input_file.read()
+        #        groups = data.split('\n\n')
+        #     for line in input_file:
+        return 0
 
 
 if __name__ == '__main__':
