@@ -13,11 +13,9 @@ import parse
 class Node(object):
     name: str
     connected: Set[str]
-    big: bool
 
     def __hash__(self):
-        str_repr = self.name + '|' + ','.join(sorted(self.connected))
-        return hash(str_repr)
+        return hash(self.name)
 
 
 @dataclass
@@ -25,7 +23,7 @@ class Graph(object):
     nodes: Dict[str, Node]
 
     def __hash__(self):
-        return hash(frozenset(self.nodes.items()))
+        return 1
 
     @cache
     def find_path(self, start: str, end: str, visited: frozenset[str] = frozenset(),
@@ -47,7 +45,7 @@ class Graph(object):
                     paths.extend([[start] + p for p in next_paths])
         uniq_paths = []
         [uniq_paths.append(p) for p in paths if p not in uniq_paths]
-        return uniq_paths
+        return paths
 
     def task_1(self):
         return self.find_path('start', 'end', frozenset())
@@ -67,11 +65,11 @@ def main():
             node_1 = graph.nodes.get(node_1_name)
             node_2 = graph.nodes.get(node_2_name)
             if node_1 is None:
-                node_1 = Node(node_1_name, set(), node_1_name.isupper())
+                node_1 = Node(node_1_name, set())
                 graph.nodes[node_1_name] = node_1
             node_1.connected.add(node_2_name)
             if node_2 is None:
-                node_2 = Node(node_2_name, set(), node_2_name.isupper())
+                node_2 = Node(node_2_name, set())
                 graph.nodes[node_2_name] = node_2
             node_2.connected.add(node_1_name)
     return graph.task_2()
